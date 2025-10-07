@@ -14,6 +14,7 @@ void menu();
 void inicializar();
 void pop();
 void push();
+void exibir();
 //--------------------------
 
 
@@ -32,7 +33,8 @@ void menu()
 		cout << "1 - Inicializar Pilha \n";
 		cout << "2 - Inserir elemento (Push) \n";
 		cout << "3 - Remover elementos (Pop) \n";
-		cout << "4 - Sair \n";
+		cout << "4 - Exibir elementos \n";
+		cout << "5 - Sair \n";
 
 
 		cout << "Opcao: ";
@@ -47,6 +49,8 @@ void menu()
 		case 3: pop();
 			break;
 		case 4:
+			exibir();
+		case 5:
 			return;
 		default:
 			break;
@@ -76,6 +80,7 @@ void inicializar()
 
 void push()
 {
+	NO* aux = topo;
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
 	if (novo == NULL)
@@ -85,15 +90,32 @@ void push()
 
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
-	novo->prox = NULL;
+	//novo->prox = NULL;
+	topo = novo;
+	topo->prox = aux;
+	free(aux);
 
-
+	cout << "Elemento " << novo->valor << " inserido";
 }
 
 void pop()
 {
+	if (topo == NULL)
+	{
+		cout << "Pilha vazia... \n";
+		return;
+	}
+	else
+	{
+		NO* aux = topo;
+		topo = topo->prox;
 
-	
-
+		cout << "elemento " << aux->valor << " excluido. \n";
+		free(aux);
+	}
 }
 
+void exibir()
+{
+
+}
